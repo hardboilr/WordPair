@@ -8,25 +8,28 @@ public interface WordPairControlInterface
 {
     
 /**
+     * Author: Tobias
      * Pre: Post: A new word pair is added to the existing collection of word
      * pairs. This method does not save to file!
-     * Author: Tobias
      */
     public void add(String question, String answer);
 
     /**
+     * Author: Tobias
      * Pre: Post: Returns the number of wordpairs in the collection (not the file).
      * Author: Tobias
      */
     int size();
 
     /**
+     * Author: Tobias
      * Pre: At least one word pair must be present Post: Returns a question
      * randomly selected from the collection of word pairs.
      */
     String getRandomQuestion();
 
     /**
+     * Author
      * Pre: Post: Returns true if (question, quess) exists as a word pair in the
      * collection, otherwise false.
      */

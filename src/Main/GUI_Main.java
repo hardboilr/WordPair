@@ -77,6 +77,11 @@ public class GUI_Main extends javax.swing.JFrame {
         getContentPane().add(jButton_next, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 80, -1, -1));
 
         jButton_guess.setText("Guess");
+        jButton_guess.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_guessActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton_guess, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 110, -1, -1));
 
         jLabel_result.setText("Correct/False");
@@ -107,14 +112,39 @@ public class GUI_Main extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton_newActionPerformed
 
     private void jButton_nextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_nextActionPerformed
-        System.out.println(wordpair.getRandomQuestion());
-//        Scanner scan = new Scanner(in);
+        //System.out.println(wordpair.getRandomQuestion());
         String text = wordpair.getRandomQuestion();
+        String question;
+        //String answer = "";
+        Scanner sc = new Scanner(text).useDelimiter(",");
+        question = sc.next();
+        jTextField_question.setText(question);
         
+        /*while (sc.hasNextLine()) {
+        sc = new Scanner(text).useDelimiter(",");
+        question = sc.next();
+        answer = sc.next();
+        }
+        jTextField_question.setText(question);
+        jTextField_answer.setText(answer);*/
         
         
         
     }//GEN-LAST:event_jButton_nextActionPerformed
+
+    private void jButton_guessActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_guessActionPerformed
+        boolean checkGuess = wordpair.checkGuess(jTextField_question.getText(), jTextField_answer.getText());
+        if (checkGuess == true) {
+            jLabel_result.setText("Correct!");
+            jTextField_answer.setText("");
+            jTextField_question.setText("");
+        }
+        else {
+            jLabel_result.setText("Wrong!");
+            jTextField_answer.setText("");
+        }
+        
+    }//GEN-LAST:event_jButton_guessActionPerformed
 
     /**
      * @param args the command line arguments
