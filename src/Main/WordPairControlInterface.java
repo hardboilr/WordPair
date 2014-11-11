@@ -12,7 +12,7 @@ public interface WordPairControlInterface
      * pairs. This method does not save to file!
      * Author: Tobias
      */
-    void add(String question, String answer);
+    public void add(String question, String answer);
 
     /**
      * Pre: Post: Returns the number of wordpairs in the collection (not the file).
