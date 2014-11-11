@@ -9,9 +9,9 @@ package Main;
  *
  * @author Tobias
  */
-public class WordPairControl {
+public class Control {
     
-    ///testsadas
+    ///testsadasas
     
     
 }
