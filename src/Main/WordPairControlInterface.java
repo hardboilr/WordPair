@@ -1,7 +1,6 @@
 package Main;
 
 /**
- *
  * @author CHU
  */
 
@@ -11,11 +10,13 @@ public interface WordPairControlInterface
 /**
      * Pre: Post: A new word pair is added to the existing collection of word
      * pairs. This method does not save to file!
+     * Author: Tobias
      */
     void add(String question, String answer);
 
     /**
      * Pre: Post: Returns the number of wordpairs in the collection (not the file).
+     * Author: Tobias
      */
     int size();
 
@@ -38,6 +39,7 @@ public interface WordPairControlInterface
     String lookup(String question);
 
     /**
+     * Author: Christoffer
      * Pre: Post: Word pairs are read from the file "filename" and added to the
      * collection of word pairs. Returns true if successfully done. Otherwise it
      * returns false.
@@ -45,6 +47,7 @@ public interface WordPairControlInterface
     boolean load(String filename);
 
     /**
+     * Author: Christoffer
      * Pre: Post: All word pairs from the collection has been written to the
      * file "filename" Returns true if successfully done. Otherwise false.
      */
@@ -52,6 +55,7 @@ public interface WordPairControlInterface
 
     /**
      * Pre: Post: The existing collection of word pairs is cleared
+     * Author: Tobias
      */
     void clear();
 }
