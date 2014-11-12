@@ -5,6 +5,7 @@ package Main;
 
 import java.util.LinkedList;
 import java.util.Random;
+import java.util.Scanner;
 
 public class Control implements WordPairControlInterface {
 
@@ -38,9 +39,6 @@ public class Control implements WordPairControlInterface {
 
     @Override
     public boolean checkGuess(String question, String guess) {
-//  Pre: Post: Returns true if (question, quess) exists as a word pair in the
-//  collection, otherwise false.
-//  if answer exists in linkedArray, then true otherwise false
         String input = question + "," + guess;
         Boolean bool = false;
         for (int i = 0; i < size(); i++) {
@@ -53,7 +51,23 @@ public class Control implements WordPairControlInterface {
 
     @Override
     public String lookup(String question) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String answer ="";
+        for (int i = 0; i < size(); i++) {
+            String wordpair = wordList.get(i).toString();
+            Scanner sc = new Scanner(wordpair).useDelimiter(",");
+            String match = sc.next();
+           // answer = sc.next();
+            if (match.equals(question)) {
+                System.out.println(answer);
+                answer = sc.next();
+                return answer;
+            }
+            else {
+                System.out.println(answer);
+                answer = "";
+            }
+        }
+        return answer;
     }
 
     @Override
@@ -67,8 +81,13 @@ public class Control implements WordPairControlInterface {
     }
 
     @Override
-    public void clear() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void clear() 
+    {
+        while (!wordList.isEmpty()) 
+        {
+            wordList.remove(0);
+        }
+        size();
     }
 
     ///testsadasas

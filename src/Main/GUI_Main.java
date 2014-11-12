@@ -11,6 +11,7 @@ public class GUI_Main extends javax.swing.JFrame {
     WordPairControlInterface wordpair;
     public GUI_Main() {
         initComponents();
+        jLabel_result.setVisible(false);
         wordpair = new Control();
         
         
@@ -99,7 +100,8 @@ public class GUI_Main extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton_lookUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_lookUpActionPerformed
-        // TODO add your handling code here:
+        String answer = wordpair.lookup(jTextField_question.getText());
+        jTextField_answer.setText(answer);
     }//GEN-LAST:event_jButton_lookUpActionPerformed
 
     private void jButton_newActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_newActionPerformed
@@ -112,24 +114,12 @@ public class GUI_Main extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton_newActionPerformed
 
     private void jButton_nextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_nextActionPerformed
-        //System.out.println(wordpair.getRandomQuestion());
+        jLabel_result.setVisible(false);
         String text = wordpair.getRandomQuestion();
         String question;
-        //String answer = "";
         Scanner sc = new Scanner(text).useDelimiter(",");
         question = sc.next();
         jTextField_question.setText(question);
-        
-        /*while (sc.hasNextLine()) {
-        sc = new Scanner(text).useDelimiter(",");
-        question = sc.next();
-        answer = sc.next();
-        }
-        jTextField_question.setText(question);
-        jTextField_answer.setText(answer);*/
-        
-        
-        
     }//GEN-LAST:event_jButton_nextActionPerformed
 
     private void jButton_guessActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_guessActionPerformed
@@ -138,10 +128,12 @@ public class GUI_Main extends javax.swing.JFrame {
             jLabel_result.setText("Correct!");
             jTextField_answer.setText("");
             jTextField_question.setText("");
+            jLabel_result.setVisible(true);
         }
         else {
             jLabel_result.setText("Wrong!");
             jTextField_answer.setText("");
+            jLabel_result.setVisible(true);
         }
         
     }//GEN-LAST:event_jButton_guessActionPerformed

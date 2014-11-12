@@ -29,7 +29,7 @@ public interface WordPairControlInterface
     String getRandomQuestion();
 
     /**
-     * Author
+     * Author: Tobias
      * Pre: Post: Returns true if (question, quess) exists as a word pair in the
      * collection, otherwise false.
      */
