@@ -1,4 +1,3 @@
-hest, horse
-bil, car
-træ, tree
-
+hest,horse
+bil,car
+træ,tree

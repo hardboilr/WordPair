@@ -7,12 +7,12 @@ package Main;
 import java.util.Scanner;
 
 public class GUI_Main extends javax.swing.JFrame {
-    WordPairControlInterface wordpair;
+    WordPairControlInterface control;
     public GUI_Main() {
         initComponents();
+        this.setLocationRelativeTo(null);
         jLabel_result.setVisible(false);
-        wordpair = new Control();
-//        hideInterface();
+        control = new Control();
     }
 
     /**
@@ -34,6 +34,8 @@ public class GUI_Main extends javax.swing.JFrame {
         jButton_guess = new javax.swing.JButton();
         jLabel_result = new javax.swing.JLabel();
         jButton_new = new javax.swing.JButton();
+        jButton_size = new javax.swing.JButton();
+        jButton_clear = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Language Trainer");
@@ -95,6 +97,22 @@ public class GUI_Main extends javax.swing.JFrame {
         });
         getContentPane().add(jButton_new, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 150, -1, -1));
 
+        jButton_size.setText("checkSize");
+        jButton_size.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_sizeActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton_size, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 250, -1, -1));
+
+        jButton_clear.setText("clearList");
+        jButton_clear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_clearActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton_clear, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 280, -1, -1));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -102,12 +120,12 @@ public class GUI_Main extends javax.swing.JFrame {
         String output;
         if (jTextField_question.getText().equals("")) {
             System.out.println("Get text from answer field");
-            output = wordpair.lookup(jTextField_answer.getText());
+            output = control.lookup(jTextField_answer.getText());
             jTextField_question.setText(output);
         }
         else {
             System.out.println("Get text from question field");
-            output = wordpair.lookup(jTextField_question.getText());
+            output = control.lookup(jTextField_question.getText());
             jTextField_answer.setText(output);
         }
         
@@ -116,14 +134,14 @@ public class GUI_Main extends javax.swing.JFrame {
     private void jButton_newActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_newActionPerformed
         String question = jTextField_question.getText();
         String answer = jTextField_answer.getText();
-        wordpair.add(question, answer);
+        control.add(question, answer);
         jTextField_question.setText("");
         jTextField_answer.setText("");
     }//GEN-LAST:event_jButton_newActionPerformed
 
     private void jButton_nextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_nextActionPerformed
         jLabel_result.setVisible(false);
-        String text = wordpair.getRandomQuestion();
+        String text = control.getRandomQuestion();
         String question;
         Scanner sc = new Scanner(text).useDelimiter(",");
         question = sc.next();
@@ -131,7 +149,7 @@ public class GUI_Main extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton_nextActionPerformed
 
     private void jButton_guessActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_guessActionPerformed
-        boolean checkGuess = wordpair.checkGuess(jTextField_question.getText(), jTextField_answer.getText());
+        boolean checkGuess = control.checkGuess(jTextField_question.getText(), jTextField_answer.getText());
         if (checkGuess == true) {
             jLabel_result.setText("Correct!");
             jTextField_answer.setText("");
@@ -148,6 +166,14 @@ public class GUI_Main extends javax.swing.JFrame {
     private void jTextField_questionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_questionActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField_questionActionPerformed
+
+    private void jButton_sizeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_sizeActionPerformed
+        System.out.println(control.size());
+    }//GEN-LAST:event_jButton_sizeActionPerformed
+
+    private void jButton_clearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_clearActionPerformed
+        control.clear();
+    }//GEN-LAST:event_jButton_clearActionPerformed
 
     /**
      * @param args the command line arguments
@@ -226,10 +252,12 @@ public class GUI_Main extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton_clear;
     private javax.swing.JButton jButton_guess;
     private javax.swing.JButton jButton_lookUp;
     private javax.swing.JButton jButton_new;
     private javax.swing.JButton jButton_next;
+    private javax.swing.JButton jButton_size;
     private javax.swing.JLabel jLabel_answer;
     private javax.swing.JLabel jLabel_question;
     private javax.swing.JLabel jLabel_result;

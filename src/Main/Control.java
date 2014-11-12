@@ -3,6 +3,9 @@
  */
 package Main;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.LinkedList;
 import java.util.Random;
@@ -13,7 +16,9 @@ public class Control implements WordPairControlInterface {
     List<WordPair> wordList;
 
     public Control() {
+//        load("wordPairsLibrary.txt");
         wordList = new LinkedList<WordPair>();
+//        System.out.println(wordList.size());
     }
 
     @Override
