@@ -6,7 +6,7 @@ package Main;
 public class WordPair  {
     
     String danish, english;
-    int priority;
+    //int priority;
 
     public WordPair(String input1, String input2) {
         this.danish = input1;

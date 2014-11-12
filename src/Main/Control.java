@@ -3,13 +3,14 @@
  */
 package Main;
 
+import java.util.List;
 import java.util.LinkedList;
 import java.util.Random;
 import java.util.Scanner;
 
 public class Control implements WordPairControlInterface {
 
-    LinkedList<WordPair> wordList;
+    List<WordPair> wordList;
 
     public Control() {
         wordList = new LinkedList<WordPair>();
@@ -50,24 +51,26 @@ public class Control implements WordPairControlInterface {
     }
 
     @Override
-    public String lookup(String question) {
-        String answer ="";
+    public String lookup(String input) {
+        //Boolean bool = false;
+        String question;
+        String answer;
+        String output = "";
         for (int i = 0; i < size(); i++) {
             String wordpair = wordList.get(i).toString();
             Scanner sc = new Scanner(wordpair).useDelimiter(",");
-            String match = sc.next();
-           // answer = sc.next();
-            if (match.equals(question)) {
+            question = sc.next();
+            answer = sc.next();
+            if (input.equals(question)) {
                 System.out.println(answer);
-                answer = sc.next();
-                return answer;
+                output = answer;
             }
-            else {
-                System.out.println(answer);
-                answer = "";
+            else if (input.equals(answer)) {
+                System.out.println(question);
+                output = question;
             }
         }
-        return answer;
+        return output;
     }
 
     @Override

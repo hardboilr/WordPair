@@ -4,7 +4,6 @@
 
 package Main;
 
-import static java.lang.System.in;
 import java.util.Scanner;
 
 public class GUI_Main extends javax.swing.JFrame {
@@ -13,13 +12,7 @@ public class GUI_Main extends javax.swing.JFrame {
         initComponents();
         jLabel_result.setVisible(false);
         wordpair = new Control();
-        
-        
-        
-        
 //        hideInterface();
-        
-        
     }
 
     /**
@@ -59,6 +52,12 @@ public class GUI_Main extends javax.swing.JFrame {
         jLabel_answer.setText("Answer");
         getContentPane().add(jLabel_answer, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, -1, -1));
         getContentPane().add(jTextField_answer, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 110, 60, -1));
+
+        jTextField_question.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField_questionActionPerformed(evt);
+            }
+        });
         getContentPane().add(jTextField_question, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 80, 60, -1));
 
         jButton_lookUp.setText("Look Up");
@@ -100,8 +99,18 @@ public class GUI_Main extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton_lookUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_lookUpActionPerformed
-        String answer = wordpair.lookup(jTextField_question.getText());
-        jTextField_answer.setText(answer);
+        String output;
+        if (jTextField_question.getText().equals("")) {
+            System.out.println("Get text from answer field");
+            output = wordpair.lookup(jTextField_answer.getText());
+            jTextField_question.setText(output);
+        }
+        else {
+            System.out.println("Get text from question field");
+            output = wordpair.lookup(jTextField_question.getText());
+            jTextField_answer.setText(output);
+        }
+        
     }//GEN-LAST:event_jButton_lookUpActionPerformed
 
     private void jButton_newActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_newActionPerformed
@@ -110,7 +119,6 @@ public class GUI_Main extends javax.swing.JFrame {
         wordpair.add(question, answer);
         jTextField_question.setText("");
         jTextField_answer.setText("");
-        //System.out.println(wordpair.size());
     }//GEN-LAST:event_jButton_newActionPerformed
 
     private void jButton_nextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_nextActionPerformed
@@ -135,8 +143,11 @@ public class GUI_Main extends javax.swing.JFrame {
             jTextField_answer.setText("");
             jLabel_result.setVisible(true);
         }
-        
     }//GEN-LAST:event_jButton_guessActionPerformed
+
+    private void jTextField_questionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_questionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField_questionActionPerformed
 
     /**
      * @param args the command line arguments

@@ -17,7 +17,6 @@ public interface WordPairControlInterface
     /**
      * Author: Tobias
      * Pre: Post: Returns the number of wordpairs in the collection (not the file).
-     * Author: Tobias
      */
     int size();
 
@@ -36,6 +35,7 @@ public interface WordPairControlInterface
     boolean checkGuess(String question, String quess);
 
     /**
+     * Author: Tobias
      * Pre: Post: Returns the answer corresponding to the question if this
      * exists in the collection. Otherwise it returns null.
      */
