@@ -3,21 +3,23 @@
  */
 package Main;
 
-import java.util.List;
 import java.util.LinkedList;
 import java.util.Random;
 import java.util.Scanner;
 
 public class Control implements WordPairControlInterface {
 
-    List<WordPair> wordList;
+    LinkedList<WordPair> wordList;
+    //String filename = "wordPairsLibrary.txt";
 
     public Control() {
         wordList = new LinkedList<WordPair>();
+        //  load("wordPairsLibrary.txt");
+        System.out.println(size());
     }
 
     public void add(String question, String answer) {
-        WordPair wordpair = new WordPair(question, answer);
+        WordPair wordpair = new WordPair(question, answer, 1);
         wordList.add(wordpair);
         System.out.println(wordpair);
     }
@@ -44,7 +46,7 @@ public class Control implements WordPairControlInterface {
         for (int i = 0; i < size(); i++) {
             if (wordList.get(i).toString().equals(input)) {
                 bool = true;
-            } 
+            }
         }
         return bool;
     }
@@ -62,8 +64,7 @@ public class Control implements WordPairControlInterface {
             if (input.equals(question)) {
                 System.out.println(answer);
                 output = answer;
-            }
-            else if (input.equals(answer)) {
+            } else if (input.equals(answer)) {
                 System.out.println(question);
                 output = question;
             }
@@ -72,27 +73,37 @@ public class Control implements WordPairControlInterface {
     }
 
     @Override
-    public boolean load(String filename) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean load(String input) {
+        if (FileHandler.loadFile(input) != null) {
+            wordList = FileHandler.loadFile(input);
+            System.out.println("Loading to wordList");
+            System.out.println(size());
+            return true;
+        } else {
+            System.out.println("Not loading to wordList");
+            return false;
+        }
     }
 
     @Override
-    public boolean save(String filename) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean save(String input) {
+        if (FileHandler.saveFile(wordList, input) == true) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @Override
-    public void clear() 
-    {
-        while (!wordList.isEmpty()) 
-        {
+    public void clear() {
+        while (!wordList.isEmpty()) {
             wordList.remove(0);
         }
         size();
     }
-    
+
     public void test() {
-        
+
     }
 
     ///testsadasas
