@@ -1,15 +1,23 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * @author Tobias
  */
 package Main;
 
-/**
- *
- * @author Tobias
- */
-public class WordPair {
+public class WordPair  {
+    
+    String danish, english;
+    //int priority;
+
+    public WordPair(String input1, String input2) {
+        this.danish = input1;
+        this.english = input2;
+        //this.priority = input3;
+    }
+
+    @Override
+    public String toString() {
+        return "" + danish + "," + english;
+    }
     
     
     

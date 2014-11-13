@@ -1,22 +1,18 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * @author Tobias & Christoffer
  */
+
 package Main;
 
-/**
- *
- * @author Tobias
- */
-public class GUI_Main extends javax.swing.JFrame {
+import java.util.Scanner;
 
-    /**
-     * Creates new form GUI_Main
-     */
+public class GUI_Main extends javax.swing.JFrame {
+    WordPairControlInterface control;
     public GUI_Main() {
         initComponents();
-        hideInterface();
+        this.setLocationRelativeTo(null);
+        jLabel_result.setVisible(false);
+        control = new Control();
     }
 
     /**
@@ -36,12 +32,9 @@ public class GUI_Main extends javax.swing.JFrame {
         jButton_lookUp = new javax.swing.JButton();
         jButton_next = new javax.swing.JButton();
         jButton_guess = new javax.swing.JButton();
-        jButton_confirm = new javax.swing.JButton();
         jLabel_result = new javax.swing.JLabel();
-        jTextField_username = new javax.swing.JTextField();
-        jButton_load = new javax.swing.JButton();
         jButton_new = new javax.swing.JButton();
-        jLabel_currentUser = new javax.swing.JLabel();
+        jButton_size = new javax.swing.JButton();
         jButton_clear = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -56,16 +49,18 @@ public class GUI_Main extends javax.swing.JFrame {
         getContentPane().add(jLabel_title, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 20, -1, -1));
 
         jLabel_question.setText("Question");
-        getContentPane().add(jLabel_question, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, -1, -1));
+        getContentPane().add(jLabel_question, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, -1, -1));
 
         jLabel_answer.setText("Answer");
-        getContentPane().add(jLabel_answer, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, -1, -1));
+        getContentPane().add(jLabel_answer, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, -1, -1));
+        getContentPane().add(jTextField_answer, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 110, 60, -1));
 
-        jTextField_answer.setText("jTextField1");
-        getContentPane().add(jTextField_answer, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 170, -1, -1));
-
-        jTextField_question.setText("jTextField1");
-        getContentPane().add(jTextField_question, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 140, -1, -1));
+        jTextField_question.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField_questionActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jTextField_question, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 80, 60, -1));
 
         jButton_lookUp.setText("Look Up");
         jButton_lookUp.addActionListener(new java.awt.event.ActionListener() {
@@ -73,68 +68,112 @@ public class GUI_Main extends javax.swing.JFrame {
                 jButton_lookUpActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton_lookUp, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 230, -1, -1));
+        getContentPane().add(jButton_lookUp, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 150, -1, -1));
 
         jButton_next.setText("Next");
-        getContentPane().add(jButton_next, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 140, -1, -1));
+        jButton_next.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_nextActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton_next, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 80, -1, -1));
 
         jButton_guess.setText("Guess");
-        getContentPane().add(jButton_guess, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 170, -1, -1));
-
-        jButton_confirm.setText("confirm");
-        jButton_confirm.addActionListener(new java.awt.event.ActionListener() {
+        jButton_guess.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_confirmActionPerformed(evt);
+                jButton_guessActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton_confirm, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 80, -1, -1));
+        getContentPane().add(jButton_guess, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 110, -1, -1));
 
         jLabel_result.setText("Correct/False");
-        getContentPane().add(jLabel_result, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, -1, -1));
+        getContentPane().add(jLabel_result, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 200, -1, -1));
 
-        jTextField_username.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField_usernameActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jTextField_username, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 80, 120, -1));
-
-        jButton_load.setText("Existing user");
-        getContentPane().add(jButton_load, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, -1, -1));
-
-        jButton_new.setText("New user");
+        jButton_new.setText("New");
         jButton_new.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton_newActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton_new, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, -1, -1));
+        getContentPane().add(jButton_new, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 150, -1, -1));
 
-        jLabel_currentUser.setText("Display current user");
-        getContentPane().add(jLabel_currentUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, -1, -1));
+        jButton_size.setText("checkSize");
+        jButton_size.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_sizeActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton_size, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 250, -1, -1));
 
-        jButton_clear.setText("Clear");
-        getContentPane().add(jButton_clear, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 230, -1, -1));
+        jButton_clear.setText("clearList");
+        jButton_clear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_clearActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton_clear, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 280, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton_lookUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_lookUpActionPerformed
-        // TODO add your handling code here:
+        String output;
+        if (jTextField_question.getText().equals("")) {
+            System.out.println("Get text from answer field");
+            output = control.lookup(jTextField_answer.getText());
+            jTextField_question.setText(output);
+        }
+        else {
+            System.out.println("Get text from question field");
+            output = control.lookup(jTextField_question.getText());
+            jTextField_answer.setText(output);
+        }
+        
     }//GEN-LAST:event_jButton_lookUpActionPerformed
 
     private void jButton_newActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_newActionPerformed
-        jTextField_username.setVisible(true);
-        jButton_confirm.setVisible(true);
+        String question = jTextField_question.getText();
+        String answer = jTextField_answer.getText();
+        control.add(question, answer);
+        jTextField_question.setText("");
+        jTextField_answer.setText("");
     }//GEN-LAST:event_jButton_newActionPerformed
 
-    private void jTextField_usernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_usernameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField_usernameActionPerformed
+    private void jButton_nextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_nextActionPerformed
+        jLabel_result.setVisible(false);
+        String text = control.getRandomQuestion();
+        String question;
+        Scanner sc = new Scanner(text).useDelimiter(",");
+        question = sc.next();
+        jTextField_question.setText(question);
+    }//GEN-LAST:event_jButton_nextActionPerformed
 
-    private void jButton_confirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_confirmActionPerformed
-        showInterface();
-    }//GEN-LAST:event_jButton_confirmActionPerformed
+    private void jButton_guessActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_guessActionPerformed
+        boolean checkGuess = control.checkGuess(jTextField_question.getText(), jTextField_answer.getText());
+        if (checkGuess == true) {
+            jLabel_result.setText("Correct!");
+            jTextField_answer.setText("");
+            jTextField_question.setText("");
+            jLabel_result.setVisible(true);
+        }
+        else {
+            jLabel_result.setText("Wrong!");
+            jTextField_answer.setText("");
+            jLabel_result.setVisible(true);
+        }
+    }//GEN-LAST:event_jButton_guessActionPerformed
+
+    private void jTextField_questionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_questionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField_questionActionPerformed
+
+    private void jButton_sizeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_sizeActionPerformed
+        System.out.println(control.size());
+    }//GEN-LAST:event_jButton_sizeActionPerformed
+
+    private void jButton_clearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_clearActionPerformed
+        control.clear();
+    }//GEN-LAST:event_jButton_clearActionPerformed
 
     /**
      * @param args the command line arguments
@@ -172,11 +211,11 @@ public class GUI_Main extends javax.swing.JFrame {
     }
     
     public void hideInterface() {
-        jTextField_username.setVisible(false);
+//        jTextField_username.setVisible(false);
         jTextField_question.setVisible(false);
         jTextField_answer.setVisible(false);
         
-        jButton_confirm.setVisible(false);
+//        jButton_confirm.setVisible(false);
         jButton_guess.setVisible(false);
         jButton_lookUp.setVisible(false);
         jButton_next.setVisible(false);
@@ -184,27 +223,27 @@ public class GUI_Main extends javax.swing.JFrame {
         jLabel_answer.setVisible(false);
         jLabel_question.setVisible(false);
         jLabel_result.setVisible(false);
-        jLabel_currentUser.setVisible(false);
+//        jLabel_currentUser.setVisible(false);
         
     }
     
     public void showInterface() {
-        jTextField_username.setVisible(false);
+//        jTextField_username.setVisible(false);
         jTextField_question.setVisible(true);
         jTextField_answer.setVisible(true);
         
-        jButton_confirm.setVisible(false);
+//        jButton_confirm.setVisible(false);
         jButton_guess.setVisible(true);
         jButton_lookUp.setVisible(true);
         jButton_next.setVisible(true);
         jButton_new.setVisible(false);
-        jButton_load.setVisible(false);
+//        jButton_load.setVisible(false);
         
         
         jLabel_answer.setVisible(true);
         jLabel_question.setVisible(true);
         jLabel_result.setVisible(true);
-        jLabel_currentUser.setVisible(true);
+//        jLabel_currentUser.setVisible(true);
     }
     
     public void checkUsernameInput() {
@@ -214,19 +253,16 @@ public class GUI_Main extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton_clear;
-    private javax.swing.JButton jButton_confirm;
     private javax.swing.JButton jButton_guess;
-    private javax.swing.JButton jButton_load;
     private javax.swing.JButton jButton_lookUp;
     private javax.swing.JButton jButton_new;
     private javax.swing.JButton jButton_next;
+    private javax.swing.JButton jButton_size;
     private javax.swing.JLabel jLabel_answer;
-    private javax.swing.JLabel jLabel_currentUser;
     private javax.swing.JLabel jLabel_question;
     private javax.swing.JLabel jLabel_result;
     private javax.swing.JLabel jLabel_title;
     private javax.swing.JTextField jTextField_answer;
     private javax.swing.JTextField jTextField_question;
-    private javax.swing.JTextField jTextField_username;
     // End of variables declaration//GEN-END:variables
 }
