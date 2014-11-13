@@ -6,13 +6,14 @@ package Main;
 public class WordPair  {
     
     String danish, english;
-    //int priority;
+    int priority;
 
-    public WordPair(String input1, String input2) {
-        this.danish = input1;
-        this.english = input2;
-        //this.priority = input3;
+    public WordPair(String question, String answer, int priority) {
+        this.danish = question;
+        this.english = answer;
+        this.priority = priority;
     }
+
 
     @Override
     public String toString() {

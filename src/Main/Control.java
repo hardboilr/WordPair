@@ -21,7 +21,6 @@ public class Control implements WordPairControlInterface {
 //        System.out.println(wordList.size());
     }
 
-    @Override
     public void add(String question, String answer) {
         WordPair wordpair = new WordPair(question, answer);
         wordList.add(wordpair);
