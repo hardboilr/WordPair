@@ -13,7 +13,6 @@ public class GUI_Main extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         jLabel_result.setVisible(false);
         control = new Control();
-        //control.load("wordPairsLibrary.txt");
     }
 
     /**

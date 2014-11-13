@@ -14,7 +14,6 @@ public class Control implements WordPairControlInterface {
 
     public Control() {
         wordList = new LinkedList<WordPair>();
-        //  load("wordPairsLibrary.txt");
         System.out.println(size());
     }
 

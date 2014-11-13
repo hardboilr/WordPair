@@ -1,2 +1,3 @@
-Bil,Car
-Hest,Horse
+Bil,Car,1
+Hest,Horse,1
+Træ,Tree,1
