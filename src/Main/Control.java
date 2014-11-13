@@ -78,7 +78,9 @@ public class Control implements WordPairControlInterface {
 
     @Override
     public boolean save(String filename) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        
+        
     }
 
     @Override
