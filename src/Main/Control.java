@@ -16,7 +16,6 @@ public class Control implements WordPairControlInterface {
         wordList = new LinkedList<WordPair>();
     }
 
-    @Override
     public void add(String question, String answer) {
         WordPair wordpair = new WordPair(question, answer);
         wordList.add(wordpair);
