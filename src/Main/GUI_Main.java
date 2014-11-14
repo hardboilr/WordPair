@@ -52,18 +52,18 @@ public class GUI_Main extends javax.swing.JFrame {
         getContentPane().add(jLabel_title, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 20, -1, -1));
 
         jLabel_question.setText("Question");
-        getContentPane().add(jLabel_question, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, -1, -1));
+        getContentPane().add(jLabel_question, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, -1, -1));
 
         jLabel_answer.setText("Answer");
-        getContentPane().add(jLabel_answer, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, -1, -1));
-        getContentPane().add(jTextField_answer, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 110, 60, -1));
+        getContentPane().add(jLabel_answer, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, -1, -1));
+        getContentPane().add(jTextField_answer, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 130, 120, -1));
 
         jTextField_question.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField_questionActionPerformed(evt);
             }
         });
-        getContentPane().add(jTextField_question, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 80, 60, -1));
+        getContentPane().add(jTextField_question, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 100, 120, -1));
 
         jButton_lookUp.setText("Look Up");
         jButton_lookUp.addActionListener(new java.awt.event.ActionListener() {
@@ -71,7 +71,7 @@ public class GUI_Main extends javax.swing.JFrame {
                 jButton_lookUpActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton_lookUp, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 150, -1, -1));
+        getContentPane().add(jButton_lookUp, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, 100, -1));
 
         jButton_next.setText("Next");
         jButton_next.addActionListener(new java.awt.event.ActionListener() {
@@ -79,7 +79,7 @@ public class GUI_Main extends javax.swing.JFrame {
                 jButton_nextActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton_next, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 80, -1, -1));
+        getContentPane().add(jButton_next, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 100, 80, -1));
 
         jButton_guess.setText("Guess");
         jButton_guess.addActionListener(new java.awt.event.ActionListener() {
@@ -87,10 +87,10 @@ public class GUI_Main extends javax.swing.JFrame {
                 jButton_guessActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton_guess, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 110, -1, -1));
+        getContentPane().add(jButton_guess, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 130, -1, -1));
 
         jLabel_result.setText("Correct/False");
-        getContentPane().add(jLabel_result, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 200, -1, -1));
+        getContentPane().add(jLabel_result, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 170, -1, -1));
 
         jButton_new.setText("New");
         jButton_new.addActionListener(new java.awt.event.ActionListener() {
@@ -98,7 +98,7 @@ public class GUI_Main extends javax.swing.JFrame {
                 jButton_newActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton_new, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 150, -1, -1));
+        getContentPane().add(jButton_new, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, 100, -1));
 
         jButton_size.setText("checkSize");
         jButton_size.addActionListener(new java.awt.event.ActionListener() {
@@ -106,7 +106,7 @@ public class GUI_Main extends javax.swing.JFrame {
                 jButton_sizeActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton_size, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 250, -1, -1));
+        getContentPane().add(jButton_size, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 260, 110, -1));
 
         jButton_clear.setText("clearList");
         jButton_clear.addActionListener(new java.awt.event.ActionListener() {
@@ -114,7 +114,7 @@ public class GUI_Main extends javax.swing.JFrame {
                 jButton_clearActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton_clear, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 280, -1, -1));
+        getContentPane().add(jButton_clear, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 260, -1, -1));
 
         jButton_save.setText("Save");
         jButton_save.addActionListener(new java.awt.event.ActionListener() {
@@ -122,7 +122,7 @@ public class GUI_Main extends javax.swing.JFrame {
                 jButton_saveActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton_save, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 180, -1, -1));
+        getContentPane().add(jButton_save, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 230, 100, -1));
 
         jButton_load.setText("Load");
         jButton_load.addActionListener(new java.awt.event.ActionListener() {
@@ -130,7 +130,7 @@ public class GUI_Main extends javax.swing.JFrame {
                 jButton_loadActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton_load, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 210, -1, -1));
+        getContentPane().add(jButton_load, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 230, 110, -1));
 
         jButton_printList.setText("printList");
         jButton_printList.addActionListener(new java.awt.event.ActionListener() {
@@ -138,7 +138,7 @@ public class GUI_Main extends javax.swing.JFrame {
                 jButton_printListActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton_printList, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 250, -1, -1));
+        getContentPane().add(jButton_printList, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 260, 100, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
