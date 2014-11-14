@@ -9,40 +9,21 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.Scanner;
 
 public class FileHandler {
     
-     public static ArrayList<WordPair> load(String filename)
+    public static LinkedList<WordPair> loadFile(String filename)
     {
+        //----------------------------------------------------
+        //remember to put 1 in priority for added wordpairs
+        //for now we load them from the list
+        //----------------------------------------------------
+        
+        
         Scanner file_scanner = null;
-        ArrayList<WordPair> wordsArray = new ArrayList<WordPair>();
-
-        try {
-            file_scanner = new Scanner(new File(filename));  //Connection to the file using the Scanner object
-        } catch (FileNotFoundException ex) {
-            System.out.println("Could not find the file to load from! Returning null.");
-            ex.printStackTrace();
-            return null;  //If something goes wrong the method returns null
-        }
-
-        while (file_scanner.hasNextLine()) {  //File found. Reading one line. 
-            String question = file_scanner.next();
-            String answer = file_scanner.next();
-            //int priority = file_scanner.nextInt();
-            WordPair c = new WordPair(question, answer /*priority*/);
-            System.out.println(c);
-            wordsArray.add(c);  //Reading in a single line and saving in the ArrayList
-        }
-
-        file_scanner.close();  //Closing the file
-        return wordsArray;    //returning the arraylist
-    }
-    
-    public static ArrayList<WordPair> loadPerson(String filename)
-    {
-        Scanner file_scanner = null;
-        ArrayList<WordPair> wordsArray = new ArrayList<WordPair>();
+        LinkedList<WordPair> wordsArray = new LinkedList<WordPair>();
 
         try {
             file_scanner = new Scanner(new File(filename));  //Connection to the file using the Scanner object
@@ -57,8 +38,8 @@ public class FileHandler {
             Scanner sc = new Scanner(linje).useDelimiter(",");
             String question = sc.next();
             String answer = sc.next();
-            //int priority = sc.nextInt();
-            WordPair c = new WordPair(question, answer /*priority*/);
+            int priority = sc.nextInt();
+            WordPair c = new WordPair(question, answer, priority);
             System.out.println(c);
             wordsArray.add(c);  //Reading in a single line and saving in the ArrayList
         }
@@ -78,8 +59,15 @@ public class FileHandler {
      * @return true if everything went well. False if an exception was raised.
      */
        
-    public static boolean savePersons(ArrayList<WordPair> wordsArray, String filename)
+    public static boolean saveFile(LinkedList<WordPair> wordsArray, String filename)
     {
+        //----------------------------------------------------
+        //remember we dont need to save out int priority. 
+        //we do this only for testing purposes for now
+        //remember to not save out "toString" but .wordpair
+        //----------------------------------------------------
+        
+        
         if( wordsArray == null ) { 
             return false;
         }  //Checking parameter for null.

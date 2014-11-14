@@ -13,6 +13,7 @@ public class GUI_Main extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         jLabel_result.setVisible(false);
         control = new Control();
+        control.load("wordPairsLibrary.txt");
     }
 
     /**
@@ -36,10 +37,12 @@ public class GUI_Main extends javax.swing.JFrame {
         jButton_new = new javax.swing.JButton();
         jButton_size = new javax.swing.JButton();
         jButton_clear = new javax.swing.JButton();
+        jButton_save = new javax.swing.JButton();
+        jButton_load = new javax.swing.JButton();
+        jButton_printList = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Language Trainer");
-        setMaximumSize(new java.awt.Dimension(480, 320));
         setMinimumSize(new java.awt.Dimension(480, 320));
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -113,6 +116,30 @@ public class GUI_Main extends javax.swing.JFrame {
         });
         getContentPane().add(jButton_clear, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 280, -1, -1));
 
+        jButton_save.setText("Save");
+        jButton_save.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_saveActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton_save, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 180, -1, -1));
+
+        jButton_load.setText("Load");
+        jButton_load.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_loadActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton_load, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 210, -1, -1));
+
+        jButton_printList.setText("printList");
+        jButton_printList.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_printListActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton_printList, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 250, -1, -1));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -174,6 +201,19 @@ public class GUI_Main extends javax.swing.JFrame {
     private void jButton_clearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_clearActionPerformed
         control.clear();
     }//GEN-LAST:event_jButton_clearActionPerformed
+
+    private void jButton_saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_saveActionPerformed
+        control.save("wordPairsLibrary.txt");
+    }//GEN-LAST:event_jButton_saveActionPerformed
+
+    private void jButton_loadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_loadActionPerformed
+        control.load("wordPairsLibrary.txt");
+    }//GEN-LAST:event_jButton_loadActionPerformed
+
+    private void jButton_printListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_printListActionPerformed
+         for (int i = 0; i < control.size(); i++) {
+         }
+    }//GEN-LAST:event_jButton_printListActionPerformed
 
     /**
      * @param args the command line arguments
@@ -254,9 +294,12 @@ public class GUI_Main extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton_clear;
     private javax.swing.JButton jButton_guess;
+    private javax.swing.JButton jButton_load;
     private javax.swing.JButton jButton_lookUp;
     private javax.swing.JButton jButton_new;
     private javax.swing.JButton jButton_next;
+    private javax.swing.JButton jButton_printList;
+    private javax.swing.JButton jButton_save;
     private javax.swing.JButton jButton_size;
     private javax.swing.JLabel jLabel_answer;
     private javax.swing.JLabel jLabel_question;
