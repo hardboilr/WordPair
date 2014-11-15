@@ -14,6 +14,7 @@ public class GUI_Main extends javax.swing.JFrame {
         jLabel_result.setVisible(false);
         control = new Control();
         control.load("wordPairsLibrary.txt");
+        displayRandomQuestion();
     }
 
     /**
@@ -167,12 +168,7 @@ public class GUI_Main extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton_newActionPerformed
 
     private void jButton_nextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_nextActionPerformed
-        jLabel_result.setVisible(false);
-        String text = control.getRandomQuestion();
-        String question;
-        Scanner sc = new Scanner(text).useDelimiter(",");
-        question = sc.next();
-        jTextField_question.setText(question);
+        displayRandomQuestion();
     }//GEN-LAST:event_jButton_nextActionPerformed
 
     private void jButton_guessActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_guessActionPerformed
@@ -182,6 +178,7 @@ public class GUI_Main extends javax.swing.JFrame {
             jTextField_answer.setText("");
             jTextField_question.setText("");
             jLabel_result.setVisible(true);
+            displayRandomQuestion();
         }
         else {
             jLabel_result.setText("Wrong!");
@@ -289,6 +286,16 @@ public class GUI_Main extends javax.swing.JFrame {
     public void checkUsernameInput() {
         //listen for text input
         //if text entered then show confirm button
+    }
+    
+    private void displayRandomQuestion() {
+        //jLabel_result.setVisible(false);
+        String text = control.getRandomQuestion();
+        String question;
+        Scanner sc = new Scanner(text).useDelimiter(",");
+        question = sc.next();
+        jTextField_question.setText(question);
+        jTextField_answer.setText("");
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
