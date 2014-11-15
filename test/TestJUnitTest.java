@@ -10,6 +10,9 @@
 //import org.junit.Test;
 //import static org.junit.Assert.*;
 //
+//import Main.WordPair;
+//import org.junit.Assert;
+//
 ///**
 // *
 // * @author Tobias
@@ -42,6 +45,28 @@
 //    //
 //    // @Test
 //    // public void hello() {}
+//    
+//    @Test
+//    public void testHasBirthDay() {
+//        Person p = new Person("Ib", 10, "12345678");
+//        p.hasBirthday();
+//        Assert.assertEquals(11, p.getAge());
+//    }
+//    
+//    @Test
+//    public void testSetAge() {
+//        Person p = new Person("Ib", 10, "12345678");
+//        p.setAge(11);
+//        assertEquals(11, p.getAge());
+//    }
+//    
+//    @Test (expected = illegalArgumentException.class)
+//    public void testSetAgeInvalid() {
+//        Person p = new Person("Ib", 10, "12345678");
+//        p.setAge(12);
+//    }
+//    
+//    
 //    
 //    @Test
 //    public void testDiceRoll() {

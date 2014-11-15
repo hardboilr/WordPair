@@ -38,7 +38,8 @@ public class FileHandler {
             Scanner sc = new Scanner(linje).useDelimiter(",");
             String question = sc.next();
             String answer = sc.next();
-            int priority = sc.nextInt();
+            //int priority = sc.nextInt();
+            int priority = 1;
             WordPair c = new WordPair(question, answer, priority);
             System.out.println(c);
             wordsArray.add(c);  //Reading in a single line and saving in the ArrayList
