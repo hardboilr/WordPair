@@ -12,6 +12,9 @@ public class Control implements WordPairControlInterface {
     //declare 5 word lists. 1 is high priority and down to 5 which is low priority 
     LinkedList<WordPair> wordList;
 
+    String chosenWordpairText;
+    String wordpairText;
+
     public Control() {
         wordList = new LinkedList<WordPair>();
     }
@@ -34,73 +37,81 @@ public class Control implements WordPairControlInterface {
         LinkedList<WordPair> randomList = new LinkedList<WordPair>();
         Random roll = new Random();
         int randomPriority;
-
         do {
-            randomPriority = roll.nextInt(15) + 1;
-            switch (randomPriority) {
-                case 1:
-                case 2:
-                case 3:
-                case 4:
-                case 5: //1-5 high priority
-                    randomPriority = 1;
-                    break;
-                case 6:
-                case 7:
-                case 8:
-                case 9:
-                    randomPriority = 2;
-                    break;
-                case 10:
-                case 11:
-                case 12:
-                    randomPriority = 3;
-                    break;
-                case 13:
-                case 14:
-                    randomPriority = 4;
-                    break;
-                case 15:
-                    randomPriority = 5; //low priority
-                    break;
-            }
-            System.out.println("1. priority is: " + randomPriority);
-            for (int i = 0; i < wordList.size(); i++) {
-                int index = wordList.get(i).getPriority();
-                if (index == randomPriority) {
-                    randomList.add(wordList.get(i));
-                    foundIt = true;
+            do {
+                randomPriority = roll.nextInt(15) + 1;
+                switch (randomPriority) {
+                    case 1:
+                    case 2:
+                    case 3:
+                    case 4:
+                    case 5: //1-5 high priority
+                        randomPriority = 1;
+                        break;
+                    case 6:
+                    case 7:
+                    case 8:
+                    case 9:
+                        randomPriority = 2;
+                        break;
+                    case 10:
+                    case 11:
+                    case 12:
+                        randomPriority = 3;
+                        break;
+                    case 13:
+                    case 14:
+                        randomPriority = 4;
+                        break;
+                    case 15:
+                        randomPriority = 5; //low priority
+                        break;
                 }
-            }
-        } while (foundIt == false);
-        int arrayIndex = roll.nextInt(randomList.size());
-        WordPair wordpair = randomList.get(arrayIndex);
-        String text = wordpair.toString();
-        System.out.println("2. I picked wordpair at index: " + randomPriority);
-        return text;
+                System.out.println("1. priority is: " + randomPriority);
+                for (int i = 0; i < wordList.size(); i++) {
+                    int index = wordList.get(i).getPriority();
+                    if (index == randomPriority) {
+                        randomList.add(wordList.get(i));
+                        foundIt = true;
+                    }
+                }
+            } while (foundIt == false);
+            int arrayIndex = roll.nextInt(randomList.size());
+            WordPair wordpair = randomList.get(arrayIndex);
+            wordpairText = wordpair.toString();
+        } while (chosenWordpairText == wordpairText); //no!, this is fucked!
+        chosenWordpairText = wordpairText;
+        return wordpairText;
     }
 
     @Override
     public boolean checkGuess(String question, String guess) {
         String input = question + "," + guess;
+        Boolean foundIt = false;
         Boolean inputComplete = true;
         Boolean bool = false;
+
+        for (int i = 0; i < size(); i++) {
+            if (wordList.get(i).getQuestion().equals(question)) {
+                foundIt = true;
+            }
+        }
 
         if (question.equals("") || guess.equals("")) {
             inputComplete = false;
         }
-        if (inputComplete == true) {
+        if (inputComplete == true && foundIt == true) {
             for (int i = 0; i < size(); i++) {
-                if (wordList.get(i).getWordpair().equals(input)) {
+                if (wordList.get(i).getAnswer().equals(guess)) {
                     bool = true;
                     //if guess is true, move priority of wordpair down
                     if (wordList.get(i).getPriority() < 5) {
                         wordList.get(i).incrementPriority(1);
-                    }
-                } else {
-                    //if guess is wrong, move priority of wordpair up
-                    if (wordList.get(i).getPriority() >= 2) {
-                        wordList.get(i).incrementPriority(-1);
+                    } else {
+                        //if guess is wrong, move priority of wordpair up
+                        if (wordList.get(i).getPriority() >= 2) {
+                            wordList.get(i).incrementPriority(-1);
+                        }
                     }
                 }
             }
