@@ -4,6 +4,7 @@
 
 package Main;
 
+import Interface.WordPairControlInterface;
 import java.util.Scanner;
 
 public class GUI_Main extends javax.swing.JFrame {

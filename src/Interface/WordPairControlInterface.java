@@ -1,4 +1,4 @@
-package Main;
+package Interface;
 
 /**
  * @author CHU
