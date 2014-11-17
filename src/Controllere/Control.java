@@ -1,10 +1,11 @@
 /**
  * @author Tobias & Christoffer
- * @todo handle spaces, small/big letters etc.
+ * @todo i add() handle spaces, small/big letters etc.
  */
-package Main;
+package Controllere;
 
 import Interface.WordPairControlInterface;
+import Entities.WordPair;
 import java.util.LinkedList;
 import java.util.Random;
 import java.util.Scanner;
@@ -13,7 +14,6 @@ public class Control implements WordPairControlInterface {
 
     //declare 5 word lists. 1 is high priority and down to 5 which is low priority 
     LinkedList<WordPair> wordList;
-
     String pickedQuestion;
     String chosenQuestion;
     String wordpairText;
@@ -23,6 +23,11 @@ public class Control implements WordPairControlInterface {
     }
 
     public void add(String question, String answer) {
+        //http://stackoverflow.com/questions/12587502/parse-string-to-remove-spaces-java
+        
+        question = question.replaceAll(" ", "").toLowerCase();
+        answer = answer.replaceAll(" ", "").toLowerCase();
+        
         WordPair wordpair = new WordPair(question, answer, 1);
         //we always want to add a new wordpair to wordlist with priority 1
         wordList.add(wordpair);
@@ -74,7 +79,7 @@ public class Control implements WordPairControlInterface {
                         randomPriority = 5; //low priority
                         break;
                 }
-                System.out.println("1. priority is: " + randomPriority);
+                /*System.out.println("1. priority is: " + randomPriority);*/
 //---------------------------------------------------------------------
 //run through wordList and find all wordpairs equal to 'randomPriority'
 //put those in 'randomList' and set foundIt to true
@@ -100,7 +105,7 @@ public class Control implements WordPairControlInterface {
         } while (pickedQuestion == chosenQuestion); //we don't want repeat questions!
         chosenQuestion = pickedQuestion;
         } else {
-            System.out.println("List is empty!");
+            /*System.out.println("List is empty!");*/
             pickedQuestion = null;
         }
         return pickedQuestion;
@@ -108,8 +113,11 @@ public class Control implements WordPairControlInterface {
 
     @Override
     public boolean checkGuess(String question, String guess) {
+        question = question.replaceAll(" ", "").toLowerCase();
+        guess = guess.replaceAll(" ", "").toLowerCase();
         String wordpair = question + "," + guess;
-        System.out.println("Entered wordpair is: " + wordpair);
+        
+        /*System.out.println("Entered wordpair is: " + wordpair);*/
         Boolean foundWordpair = false;
 
         for (int i = 0; i < size(); i++) {
@@ -117,17 +125,17 @@ public class Control implements WordPairControlInterface {
                 foundWordpair = true;
                 if (wordList.get(i).getPriority() < 5) {
                     wordList.get(i).incrementPriority(1);
-                    /* DELETE TESTING*/System.out.println("Moving wordpair 'down' in priority!");
+                    /*System.out.println("Moving wordpair 'down' in priority!");*/
                 }
             }
             if (wordList.get(i).getQuestion().equals(question) && guess != "" && foundWordpair == false) {
                 if (wordList.get(i).getPriority() >= 2) {
                     wordList.get(i).incrementPriority(-1);
-                    /* DELETE TESTING*/System.out.println("Moving wordpair 'up' in priority!");
+                    /*System.out.println("Moving wordpair 'up' in priority!");*/
                 }
             }
         } 
-        /* DELETE TESTING*/System.out.println("Found wordpair: " + foundWordpair);
+        /*System.out.println("Found wordpair: " + foundWordpair);*/
         return foundWordpair;
        
     }
@@ -143,10 +151,10 @@ public class Control implements WordPairControlInterface {
             question = sc.next();
             answer = sc.next();
             if (input.equals(question)) {
-                System.out.println(answer);
+                /*System.out.println(answer);*/
                 output = answer;
             } else if (input.equals(answer)) {
-                System.out.println(question);
+                /*System.out.println(question);*/
                 output = question;
             }
         }
@@ -157,11 +165,11 @@ public class Control implements WordPairControlInterface {
     public boolean load(String input) {
         if (FileHandler.loadFile(input) != null) {
             wordList = FileHandler.loadFile(input);
-            System.out.println("Loading to wordList");
-            System.out.println(size());
+            /*System.out.println("Loading to wordList");*/
+            /*System.out.println(size());*/
             return true;
         } else {
-            System.out.println("Not loading to wordList");
+            /*System.out.println("Not loading to wordList");*/
             return false;
         }
     }

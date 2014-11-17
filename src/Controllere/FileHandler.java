@@ -2,8 +2,9 @@
  * * @author Christoffer
  */
 
-package Main;
+package Controllere;
 
+import Entities.WordPair;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -35,8 +36,8 @@ public class FileHandler {
         while (file_scanner.hasNextLine()) {  //File found. Reading one line. 
             String linje = file_scanner.nextLine();
             Scanner sc = new Scanner(linje).useDelimiter(",");
-            String question = sc.next();
-            String answer = sc.next();
+            String question = sc.next().toLowerCase();
+            String answer = sc.next().toLowerCase();
             int priority = sc.nextInt();
             //int priority = 1;
             WordPair c = new WordPair(question, answer, priority);

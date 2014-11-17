@@ -20,7 +20,7 @@ package Test;
 
 //import Entity.Engine;
 import Interface.WordPairControlInterface;
-import Main.Control;
+import Controllere.Control;
 import java.util.UUID;
 import org.junit.After;
 import org.junit.Before;
@@ -181,7 +181,7 @@ public class WordPair_Test_v3
      */
     public void testGetRandomQuestion()
     {
-        int testTries = 300;
+        int testTries = 1000000; // 1 million!!
         boolean horseFound = false;
         boolean houseFound = false;
         boolean tabelFound = false;

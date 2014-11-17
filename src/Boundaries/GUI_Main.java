@@ -2,9 +2,10 @@
  * @author Tobias & Christoffer
  */
 
-package Main;
+package Boundaries;
 
 import Interface.WordPairControlInterface;
+import Controllere.Control;
 import java.util.Scanner;
 
 public class GUI_Main extends javax.swing.JFrame {
@@ -37,11 +38,6 @@ public class GUI_Main extends javax.swing.JFrame {
         jButton_guess = new javax.swing.JButton();
         jLabel_result = new javax.swing.JLabel();
         jButton_new = new javax.swing.JButton();
-        jButton_size = new javax.swing.JButton();
-        jButton_clear = new javax.swing.JButton();
-        jButton_save = new javax.swing.JButton();
-        jButton_load = new javax.swing.JButton();
-        jButton_printList = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Language Trainer");
@@ -73,7 +69,7 @@ public class GUI_Main extends javax.swing.JFrame {
                 jButton_lookUpActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton_lookUp, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, 100, -1));
+        getContentPane().add(jButton_lookUp, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 160, 100, -1));
 
         jButton_next.setText("Next");
         jButton_next.addActionListener(new java.awt.event.ActionListener() {
@@ -100,47 +96,7 @@ public class GUI_Main extends javax.swing.JFrame {
                 jButton_newActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton_new, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, 100, -1));
-
-        jButton_size.setText("checkSize");
-        jButton_size.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_sizeActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton_size, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 260, 110, -1));
-
-        jButton_clear.setText("clearList");
-        jButton_clear.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_clearActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton_clear, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 260, -1, -1));
-
-        jButton_save.setText("Save");
-        jButton_save.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_saveActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton_save, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 230, 100, -1));
-
-        jButton_load.setText("Load");
-        jButton_load.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_loadActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton_load, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 230, 110, -1));
-
-        jButton_printList.setText("printList");
-        jButton_printList.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_printListActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton_printList, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 260, 100, -1));
+        getContentPane().add(jButton_new, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 190, 100, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -166,6 +122,7 @@ public class GUI_Main extends javax.swing.JFrame {
         control.add(question, answer);
         jTextField_question.setText("");
         jTextField_answer.setText("");
+        control.save("wordPairsLibrary.txt");
     }//GEN-LAST:event_jButton_newActionPerformed
 
     private void jButton_nextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_nextActionPerformed
@@ -191,27 +148,6 @@ public class GUI_Main extends javax.swing.JFrame {
     private void jTextField_questionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_questionActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField_questionActionPerformed
-
-    private void jButton_sizeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_sizeActionPerformed
-        System.out.println(control.size());
-    }//GEN-LAST:event_jButton_sizeActionPerformed
-
-    private void jButton_clearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_clearActionPerformed
-        control.clear();
-    }//GEN-LAST:event_jButton_clearActionPerformed
-
-    private void jButton_saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_saveActionPerformed
-        control.save("wordPairsLibrary.txt");
-    }//GEN-LAST:event_jButton_saveActionPerformed
-
-    private void jButton_loadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_loadActionPerformed
-        control.load("wordPairsLibrary.txt");
-    }//GEN-LAST:event_jButton_loadActionPerformed
-
-    private void jButton_printListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_printListActionPerformed
-         for (int i = 0; i < control.size(); i++) {
-         }
-    }//GEN-LAST:event_jButton_printListActionPerformed
 
     /**
      * @param args the command line arguments
@@ -300,15 +236,10 @@ public class GUI_Main extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton_clear;
     private javax.swing.JButton jButton_guess;
-    private javax.swing.JButton jButton_load;
     private javax.swing.JButton jButton_lookUp;
     private javax.swing.JButton jButton_new;
     private javax.swing.JButton jButton_next;
-    private javax.swing.JButton jButton_printList;
-    private javax.swing.JButton jButton_save;
-    private javax.swing.JButton jButton_size;
     private javax.swing.JLabel jLabel_answer;
     private javax.swing.JLabel jLabel_question;
     private javax.swing.JLabel jLabel_result;

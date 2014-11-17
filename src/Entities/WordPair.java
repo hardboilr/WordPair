@@ -1,7 +1,7 @@
 /**
  * @author Tobias
  */
-package Main;
+package Entities;
 
 public class WordPair  {
     
