@@ -2,7 +2,7 @@
  * * @author Christoffer
  */
 
-package Controllere;
+package Filehandling;
 
 import Entities.WordPair;
 import java.io.File;
@@ -21,7 +21,6 @@ public class FileHandler {
         //for now we load them from the list
         //----------------------------------------------------
         
-        
         Scanner file_scanner = null;
         LinkedList<WordPair> wordsArray = new LinkedList<WordPair>();
 
@@ -38,10 +37,8 @@ public class FileHandler {
             Scanner sc = new Scanner(linje).useDelimiter(",");
             String question = sc.next().toLowerCase();
             String answer = sc.next().toLowerCase();
-            int priority = sc.nextInt();
-            //int priority = 1;
+            int priority = 1;
             WordPair c = new WordPair(question, answer, priority);
-            System.out.println(c);
             wordsArray.add(c);  //Reading in a single line and saving in the ArrayList
         }
 
@@ -77,7 +74,7 @@ public class FileHandler {
         try {
                 output = new FileWriter(new File(filename));  //Opening connection to file.
                 for (WordPair combination : wordsArray) {   //running through the ArrayList.                    
-                    output.write(combination.toString() + "\n");  //Each String object is written as a line in file.
+                    output.write(combination.getWordpair() + "\n");  //Each String object is written as a line in file.
             }
 
             output.close();  //Closing the file

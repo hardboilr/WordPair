@@ -5,8 +5,8 @@ package Entities;
 
 public class WordPair  {
     
-    String danish, english;
-    int priority;
+    private String danish, english;
+    private int priority;
 
     public WordPair(String question, String answer, int priority) {
         this.danish = question;

@@ -2,7 +2,7 @@ package GUISwap;
 
 
 import Controllere.Control;
-import Interface.WordPairControlInterface;
+import Interfaces.WordPairControlInterface;
 import java.awt.Color;
 
 /*

@@ -1,7 +1,7 @@
 package GUISwap;
 
 
-import Interface.WordPairControlInterface;
+import Interfaces.WordPairControlInterface;
 
 /*
  * To change this license header, choose License Headers in Project Properties.

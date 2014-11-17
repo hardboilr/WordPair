@@ -1,25 +1,16 @@
 package Test;
 
-
-
 /**
- * @author lam
- * 10-10-2012 hau: 
- * Direct file manipulation removed (the test should not require more than is 
- * expressed in the interface  - ex: a specific file format)
- * Use of special danish characters omitted
- * Added negative tests
- * 9-10-2013 hau: 
- * automatic filename generation deleted (filename is not part of interface)
- * 3-3-2014 pelo:
- * Added extensive javadoc explanation. 
- * Increased testTries from 30 to 300 in testGetRandomQuestion()
- * 12-4-2014 Stefan (student at Cphbusiness.dk) 
- * Added code to make this test run on a unix like filesystem
+ * @author lam 10-10-2012 hau: Direct file manipulation removed (the test should
+ * not require more than is expressed in the interface - ex: a specific file
+ * format) Use of special danish characters omitted Added negative tests
+ * 9-10-2013 hau: automatic filename generation deleted (filename is not part of
+ * interface) 3-3-2014 pelo: Added extensive javadoc explanation. Increased
+ * testTries from 30 to 300 in testGetRandomQuestion() 12-4-2014 Stefan (student
+ * at Cphbusiness.dk) Added code to make this test run on a unix like filesystem
  */
-
 //import Entity.Engine;
-import Interface.WordPairControlInterface;
+import Interfaces.WordPairControlInterface;
 import Controllere.Control;
 import java.util.UUID;
 import org.junit.After;
@@ -31,36 +22,31 @@ import static org.junit.Assert.*;
  *
  * Unit test for the WordPairDemo interface
  */
-public class WordPair_Test_v3
-{
+public class WordPair_Test_v3 {
 
-    private WordPairControlInterface wordPairDemo;    
+    private WordPairControlInterface wordPairDemo;
     private static String fileName = getFilenameGuid();
-
 
     /**
      * Utility method to generate a random filename which can't exist before on
-     * users computer. It generates a random number and adds the .txt
-     * extension to it. The method asks for the current users home directory and
-     * saves the file there. A new file is created each time the test is run.
-     * You can find them in your own home directory: "C:\User\Peter\"
+     * users computer. It generates a random number and adds the .txt extension
+     * to it. The method asks for the current users home directory and saves the
+     * file there. A new file is created each time the test is run. You can find
+     * them in your own home directory: "C:\User\Peter\"
      */
-    private static String getFilenameGuid()
-    {
+    private static String getFilenameGuid() {
 //         Value to use a Windows or Unix like filesystem.
 //         Set to false if you use a Mac or linux variant.
         boolean WindowsOS = true;
-        
+
         String path = System.getProperty("user.home");
-        
-        if(WindowsOS){
+
+        if (WindowsOS) {
             return path + "\\" + UUID.randomUUID().toString() + ".txt";
-        }else{
+        } else {
             return path + "/" + UUID.randomUUID().toString() + ".txt";
         }
-        
     }
-
 
     /**
      * This method is executed EVERY TIME just before each of the test methods
@@ -68,32 +54,27 @@ public class WordPair_Test_v3
      * the every testmethod has some content to test on.
      */
     @Before
-    public void setUp()
-    {
+    public void setUp() {
 //        REPLACE WordPairDemoV1    WITH YOUR OWN CLASS THAT IMPLEMENTS THE INTERFACE
         wordPairDemo = new Control(); // !!!!! REPLACE HERE !!!!!
         assertTrue(wordPairDemo.size() == 0);
-        wordPairDemo.add("hest","horse");      //We trust the add() method here!
-        wordPairDemo.add("hus","house");
-        wordPairDemo.add("bord","table");
+        wordPairDemo.add("hest", "horse");      //We trust the add() method here!
+        wordPairDemo.add("hus", "house");
+        wordPairDemo.add("bord", "table");
     }
 
     @After
-    public void tearDown()
-    {
+    public void tearDown() {
     }
 
 ////////////////////////////////////////////// THE ACTUAL TEST METHODS  ////////////////////////////////////
-
-
     @Test
     /**
      * This test requires that both save and load are implemented, since the
      * test strategy is: Save the file, clear the content of the list, and read
      * the file back in and check the result.
      */
-    public void testLoad()
-    {
+    public void testLoad() {
         assertTrue(wordPairDemo.save(fileName));
         wordPairDemo.clear();
         assertTrue(wordPairDemo.load(fileName));
@@ -107,16 +88,14 @@ public class WordPair_Test_v3
     /**
      * This test is redundant (covered by testLoad).
      */
-    public void testSave()
-    {
+    public void testSave() {
     }
 
     /**
      * This test first tries to find an existing word pair.
      */
     @Test
-    public void testLookup_1()
-    {
+    public void testLookup_1() {
         assertEquals("Looked up hest. Expected: horse. Got: " + wordPairDemo.lookup("hest"),
                 wordPairDemo.lookup("hest"), "horse");
     }
@@ -128,15 +107,13 @@ public class WordPair_Test_v3
      * second will fail the second part this test case.
      */
     @Test
-    public void testLookup_SecondWord()
-    {
+    public void testLookup_SecondWord() {
         assertNotSame("Expected: something different from Cow. Got: " + wordPairDemo.lookup("hest"),
                 wordPairDemo.lookup("hest"), "Cow");
     }
 
     @Test
-    public void testClear()
-    {
+    public void testClear() {
         wordPairDemo.clear();
         int collectionSize = wordPairDemo.size();
         assertTrue("Cleared the collection of word pairs. Expected size: 0. Got size: " + collectionSize, collectionSize == 0);
@@ -147,8 +124,7 @@ public class WordPair_Test_v3
      * after this method adds the ko-cow pair.
      */
     @Test
-    public void testAdd_4()
-    {
+    public void testAdd_4() {
         wordPairDemo.add("ko", "cow");
         int resultSize = wordPairDemo.size();
         assertTrue("Added a 4th wordpair. Expected size: 4. Got size: " + resultSize, resultSize == 4);
@@ -160,8 +136,7 @@ public class WordPair_Test_v3
      * Checking to see if a wordpair that we add is actually there.
      */
     @Test
-    public void testAdd_GotItRight()
-    {
+    public void testAdd_GotItRight() {
         wordPairDemo.add("ko", "cow");
         String lookUpResult = wordPairDemo.lookup("ko");
         assertEquals("Added wordpair ko-cow and called loookup(). Expected cow. Got: " + lookUpResult, lookUpResult, "cow");
@@ -179,26 +154,21 @@ public class WordPair_Test_v3
      * be generated.
      *
      */
-    public void testGetRandomQuestion()
-    {
+    public void testGetRandomQuestion() {
         int testTries = 1000000; // 1 million!!
         boolean horseFound = false;
         boolean houseFound = false;
         boolean tabelFound = false;
 
-        for (int i = 0; i < testTries; i++)
-        {
+        for (int i = 0; i < testTries; i++) {
             String question = wordPairDemo.getRandomQuestion();
-            if (question.equals("hest"))
-            {
+            if (question.equals("hest")) {
                 horseFound = true;
             }
-            if (question.equals("hus"))
-            {
+            if (question.equals("hus")) {
                 houseFound = true;
             }
-            if (question.equals("bord"))
-            {
+            if (question.equals("bord")) {
                 tabelFound = true;
             }
         }
@@ -209,8 +179,7 @@ public class WordPair_Test_v3
     }
 
     @Test
-    public void testCheckGuessTrue()
-    {
+    public void testCheckGuessTrue() {
         assertTrue("Expected true. Got: " + wordPairDemo.checkGuess("hest", "horse") + " for the wordpair hest, horse",
                 wordPairDemo.checkGuess("hest", "horse"));
     }
@@ -221,19 +190,14 @@ public class WordPair_Test_v3
      * pair "hest"-"cow".
      */
     @Test
-    public void testCheckGuessBoth()
-    {
+    public void testCheckGuessBoth() {
         assertFalse("Expected false. Got: " + wordPairDemo.checkGuess("hest", "cow") + " for the wordpair hest,cow",
                 wordPairDemo.checkGuess("hest", "cow"));
     }
 
     @Test
-    public void testGetSize()
-    {
+    public void testGetSize() {
         assertTrue("Expected size 3. Got: " + wordPairDemo.size(), wordPairDemo.size() == 3);
     }
-    
-    
-    
+
 }
- 
