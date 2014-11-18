@@ -27,9 +27,21 @@ public class Control implements WordPairControlInterface {
         //remove spaces and set all characters to lowercase
         question = question.replaceAll(" ", "").toLowerCase();
         answer = answer.replaceAll(" ", "").toLowerCase();
-        //we always want to add a new wordpair to wordlist with priority 1
-        WordPair wordpair = new WordPair(question, answer, 1);
-        wordList.add(wordpair);
+
+        if (!question.isEmpty() && !answer.isEmpty()) {
+            Boolean pairExists = false;
+            String pair = question + "," + answer;
+            for (int i = 0; i < wordList.size(); i++) {
+                if (wordList.get(i).getWordpair().equals(pair)) {
+                    pairExists = true;
+                }
+            }
+            if (pairExists != true) {
+                //we always want to add a new wordpair to wordlist with priority 1
+                WordPair wordpair = new WordPair(question, answer, 1);
+                wordList.add(wordpair);
+            }
+        }
     }
 
     @Override
@@ -108,7 +120,8 @@ public class Control implements WordPairControlInterface {
     }
 
     @Override
-    public boolean checkGuess(String question, String guess) {
+    public boolean checkGuess(String question, String guess
+    ) {
         //again remove spaces and set all chars to lowercase
         question = question.replaceAll(" ", "").toLowerCase();
         guess = guess.replaceAll(" ", "").toLowerCase();
@@ -142,7 +155,8 @@ public class Control implements WordPairControlInterface {
     }
 
     @Override
-    public String lookup(String input) {
+    public String lookup(String input
+    ) {
 //-----------------------------------------------------------
 //run through the list and pick out wordpairs
 //if input equals either a question or answer from the list, 
@@ -164,7 +178,8 @@ public class Control implements WordPairControlInterface {
     }
 
     @Override
-    public boolean load(String input) {
+    public boolean load(String input
+    ) {
         if (FileHandler.loadFile(input) != null) {
             wordList = FileHandler.loadFile(input);
             return true;
@@ -174,7 +189,8 @@ public class Control implements WordPairControlInterface {
     }
 
     @Override
-    public boolean save(String input) {
+    public boolean save(String input
+    ) {
         if (FileHandler.saveFile(wordList, input) == true) {
             return true;
         } else {
