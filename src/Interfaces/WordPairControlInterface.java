@@ -28,7 +28,7 @@ public interface WordPairControlInterface
      * Pre: Post: Returns true if (question, quess) exists as a word pair in the
      * collection, otherwise false.
      */
-    boolean checkGuess(String question, String quess);
+    boolean checkGuess(String question, String guess);
 
     /**
      * Pre: Post: Returns the answer corresponding to the question if this

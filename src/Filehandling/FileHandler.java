@@ -16,11 +16,6 @@ public class FileHandler {
     
     public static LinkedList<WordPair> loadFile(String filename)
     {
-        //----------------------------------------------------
-        //remember to put 1 in priority for added wordpairs
-        //for now we load them from the list
-        //----------------------------------------------------
-        
         Scanner file_scanner = null;
         LinkedList<WordPair> wordsArray = new LinkedList<WordPair>();
 
@@ -59,13 +54,6 @@ public class FileHandler {
        
     public static boolean saveFile(LinkedList<WordPair> wordsArray, String filename)
     {
-        //----------------------------------------------------
-        //remember we dont need to save out int priority. 
-        //we do this only for testing purposes for now
-        //remember to not save out "toString" but .wordpair
-        //----------------------------------------------------
-        
-        
         if( wordsArray == null ) { 
             return false;
         }  //Checking parameter for null.

@@ -17,3 +17,4 @@ benzin,gasoline
 føntørrer,blowdryer
 kop,cup
 lav,low
+hej,hello
