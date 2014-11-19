@@ -17,7 +17,7 @@ public class FileHandler {
     public static LinkedList<WordPair> loadFile(String filename)
     {
         Scanner file_scanner = null;
-        LinkedList<WordPair> wordsArray = new LinkedList<WordPair>();
+        LinkedList<WordPair> list = new LinkedList<WordPair>();
 
         try {
             file_scanner = new Scanner(new File(filename));  //Connection to the file using the Scanner object
@@ -32,22 +32,20 @@ public class FileHandler {
             Scanner sc = new Scanner(linje).useDelimiter(",");
             String question = sc.next().toLowerCase();
             String answer = sc.next().toLowerCase();
-            
-            double priority = Double.parseDouble(sc.next());
-            double normalized = Double.parseDouble(sc.next());
-  
-//------------------------------------
-//Use these for testing purposes!
-//            double priority = 0.5;
-//            double normalized = 0.0;
-//------------------------------------
+            double priority = 0.5;
+            double normalized = 0.0;
+//-------------------------------------------------------------
+//Use these for testing!
+//          double priority = Double.parseDouble(sc.next());
+//          double normalized = Double.parseDouble(sc.next());
+//-------------------------------------------------------------
             
             WordPair c = new WordPair(question, answer, priority, normalized);
-            wordsArray.add(c);  //Reading in a single line and saving in the ArrayList
+            list.add(c);  //Reading in a single line and saving in the ArrayList
         }
 
         file_scanner.close();  //Closing the file
-        return wordsArray;    //returning the arraylist
+        return list;    //returning the arraylist
     }
 
     /**
@@ -71,7 +69,10 @@ public class FileHandler {
         try {
                 output = new FileWriter(new File(filename));  //Opening connection to file.
                 for (WordPair combination : wordsArray) {   //running through the ArrayList.                    
-                    output.write(combination.toString() + "\n");  //Each String object is written as a line in file.
+                    output.write(combination.getWordpair() + "\n");  //Each String object is written as a line in file.
+//------------------------------------------------------------------------------------------------ 
+//Used for testing!
+//output.write(combination.toString() + "\n");  //Each String object is written as a line in file.
             }
 
             output.close();  //Closing the file

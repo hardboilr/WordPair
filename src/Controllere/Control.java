@@ -13,7 +13,6 @@ import java.util.Scanner;
 
 public class Control implements WordPairControlInterface {
 
-    //declare 5 word lists. 1 is high priority and down to 5 which is low priority 
     private LinkedList<WordPair> wordList;
     private String pickedQuestion;
     private String chosenQuestion;
@@ -31,7 +30,9 @@ public class Control implements WordPairControlInterface {
         //remove spaces and set all characters to lowercase
         question = question.replaceAll(" ", "").toLowerCase();
         answer = answer.replaceAll(" ", "").toLowerCase();
-
+        
+        //we only add a new wordpair if both input-fields are used
+        //and the wordpair doesn't exist in the list 
         if (!question.isEmpty() && !answer.isEmpty()) {
             Boolean pairExists = false;
             String pair = question + "," + answer;
@@ -41,10 +42,11 @@ public class Control implements WordPairControlInterface {
                 }
             }
             if (pairExists != true) {
-                //we always want to add a new wordpair to wordlist with priority 1
+                //we always want to add a new wordpair to wordlist with weight 0.5 
                 WordPair wordpair = new WordPair(question, answer, 0.5, 0.0);
                 wordList.add(wordpair);
-                normalizePriorities();
+                //sum again and assign new normalized weights
+                normalizeWeights();
             }
         }
     }
@@ -54,27 +56,35 @@ public class Control implements WordPairControlInterface {
         int size = wordList.size();
         return size;
     }
+//----------------------------------------------------------------------------
+//New implementation of getRandomQuestion() using normalized priority weights
+//roll a double between 0 and 1, fx. 0.2345645 
+//We run through the list and sum the normalized weights from each wordpair.
+//when sum equals or above prob we pick out that particular wordpair
+//OBS: The method has been tested in "Distribution_Test" running 1million times
+//the distribution corresponds to the normalized weights, so everything works as intended. Very nice!
+//if you want to test, make sure to make proper corrections to the code in FileHandler (see comments there)
 
     @Override
     public String getRandomQuestion() {
         Random roll = new Random();
-        double result = roll.nextDouble();
-        //System.out.println(result);
-        String pickedQuestion = null;
+        double prob = roll.nextDouble();
         double sum = 0;
+        String question = null;
         for (int i = 0; i < size(); i++) {
-            sum = sum + wordList.get(i).getNormalizedPriority();
-            if (sum >= result) {
-                pickedQuestion = wordList.get(i).getQuestion();
-                break;
+            sum = sum + wordList.get(i).getNormalizedWeight();
+            if (sum >= prob) {
+                question = wordList.get(i).getQuestion();
+                break; //no need to go through the entire list
             }
         }
-
-        //pickedQuestion = wordList.get(0).getQuestion();
-        //System.out.println(pickedQuestion);
-        return pickedQuestion;
+        return question;
     }
 
+//-------------------------------------------------------------------------------------
+//Old implementation of getRandomQuestion() based on suggestions from assignment-text
+//Does not work properly, unless you have an even number of wordpairs in each priority
+//-------------------------------------------------------------------------------------
 //    @Override
 //    public String getRandomQuestion() {
 //        if (!wordList.isEmpty()) {
@@ -159,7 +169,7 @@ public class Control implements WordPairControlInterface {
 //-----------------------------------------------------------------------
             if (wordList.get(i).getWordpair().equals(wordpair)) {
                 foundWordpair = true;
-                wordList.get(i).incrementPriority(DECREASE_PRIORITY);
+                wordList.get(i).incrementWeight(DECREASE_PRIORITY);
             }
 //----------------------------------------------------------
 //if inputted question matches a question in the list
@@ -168,7 +178,7 @@ public class Control implements WordPairControlInterface {
 //the particular question is then moved up in priority
 //----------------------------------------------------------
             if (wordList.get(i).getQuestion().equals(question) && guess != "" && foundWordpair == false) {
-                wordList.get(i).incrementPriority(INCREASE_PRIORITY);
+                wordList.get(i).incrementWeight(INCREASE_PRIORITY);
             }
         }
         return foundWordpair;
@@ -202,7 +212,7 @@ public class Control implements WordPairControlInterface {
     ) {
         if (FileHandler.loadFile(input) != null) {
             wordList = FileHandler.loadFile(input);
-            normalizePriorities();
+            normalizeWeights();
             return true;
         } else {
             return false;
@@ -223,16 +233,20 @@ public class Control implements WordPairControlInterface {
         wordList.clear();
     }
 
-    private void normalizePriorities() {
+//------------------------------------------------
+//sum all absolute weights
+//the normalized value is then found by dividing 
+//the absolute weight with the sum
+//------------------------------------------------    
+    private void normalizeWeights() {
         double sum = 0;
-        //sum all priorities
         for (int i = 0; i < size(); i++) {
-            sum = sum + wordList.get(i).getPriority();
+            sum = sum + wordList.get(i).getWeight();
         }
         //normalize priorities
         for (int i = 0; i < size(); i++) {
-            double normalizedValue = wordList.get(i).getPriority() / sum;
-            wordList.get(i).setNormalizedPriority(normalizedValue);
+            double normalizedValue = wordList.get(i).getWeight() / sum;
+            wordList.get(i).setNormalizedWeight(normalizedValue);
         }
     }
 }

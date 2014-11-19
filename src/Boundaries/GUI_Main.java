@@ -39,7 +39,6 @@ public class GUI_Main extends javax.swing.JFrame {
         jButton_guess = new javax.swing.JButton();
         jLabel_result = new javax.swing.JLabel();
         jButton_new = new javax.swing.JButton();
-        jButton_save = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Language Trainer v 0.1");
@@ -110,14 +109,6 @@ public class GUI_Main extends javax.swing.JFrame {
         });
         getContentPane().add(jButton_new, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 190, 90, -1));
 
-        jButton_save.setText("SAVE");
-        jButton_save.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_saveActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton_save, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, -1, -1));
-
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -165,10 +156,6 @@ public class GUI_Main extends javax.swing.JFrame {
     private void jTextField_questionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_questionActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField_questionActionPerformed
-
-    private void jButton_saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_saveActionPerformed
-        control.save("wordPairsLibrary.txt");
-    }//GEN-LAST:event_jButton_saveActionPerformed
 
     /**
      * @param args the command line arguments
@@ -243,7 +230,6 @@ public class GUI_Main extends javax.swing.JFrame {
     private javax.swing.JButton jButton_lookUp;
     private javax.swing.JButton jButton_new;
     private javax.swing.JButton jButton_next;
-    private javax.swing.JButton jButton_save;
     private javax.swing.JLabel jLabel_answer;
     private javax.swing.JLabel jLabel_question;
     private javax.swing.JLabel jLabel_result;

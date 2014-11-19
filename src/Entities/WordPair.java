@@ -6,12 +6,12 @@ package Entities;
 public class WordPair  {
     
     private String danish, english;
-    private double priority, normalized;
+    private double weight, normalized;
 
     public WordPair(String question, String answer, double priority, double normalized) {
         this.danish = question;
         this.english = answer;
-        this.priority = priority;
+        this.weight = priority;
         this.normalized = normalized;
     }
     
@@ -27,26 +27,26 @@ public class WordPair  {
         return danish+","+english;
     }
     
-    public double getPriority() {
-        return priority;
+    public double getWeight() {
+        return weight;
     }
     
-    public void incrementPriority(double input) {
-        priority = priority * input;
+    public void incrementWeight(double input) {
+        weight = weight * input;
     }
     
-    public void setNormalizedPriority(double input) {
+    public void setNormalizedWeight(double input) {
         normalized = input;
     }
     
-    public double getNormalizedPriority() {
+    public double getNormalizedWeight() {
         return normalized;
     }
 
 
     @Override
     public String toString() {
-        return "" + danish + "," + english + "," + priority + "," + normalized;
+        return "" + danish + "," + english + "," + weight + "," + normalized;
     }
     
     

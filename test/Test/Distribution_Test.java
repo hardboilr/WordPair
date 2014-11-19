@@ -19,7 +19,7 @@ import static org.junit.Assert.*;
  *
  * @author Tobias
  */
-public class NewEmptyJUnitTest {
+public class Distribution_Test {
 
     private WordPairControlInterface wordPairDemo;
     private static String fileName = getFilenameGuid();
