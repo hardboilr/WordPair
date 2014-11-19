@@ -22,3 +22,9 @@ doven,lazy
 ged,goat
 massere,massage
 nørd,nerd
+kat,cat
+hund,dog
+tog,train
+tastatur,keyboard
+kaste,throw
+test,test

@@ -82,7 +82,32 @@ public class FileHandler {
             ex.printStackTrace();
             return false;  //If something goes wrong false is returned!
         }
+        return true;
+    }    
+    
+    public static boolean saveFileWithWeights(LinkedList<WordPair> wordsArray, String filename)
+    {
+        if( wordsArray == null ) { 
+            return false;
+        }  //Checking parameter for null.
+        FileWriter output;  //Creating reference for filewriter.
+        
+        try {
+                output = new FileWriter(new File(filename));  //Opening connection to file.
+                for (WordPair combination : wordsArray) {   //running through the ArrayList.                    
+                    output.write(combination.toString() + "\n");  //Each String object is written as a line in file.
+//------------------------------------------------------------------------------------------------ 
+//Used for testing!
+//output.write(combination.toString() + "\n");  //Each String object is written as a line in file.
+            }
 
+            output.close();  //Closing the file
+        } catch (IOException ex) {  //If something goes wrong everything is send to system out.
+            System.out.println("Could not save to file!");
+            System.out.println(ex.toString());
+            ex.printStackTrace();
+            return false;  //If something goes wrong false is returned!
+        }
         return true;
     }    
 }

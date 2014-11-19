@@ -17,8 +17,8 @@ public class Control implements WordPairControlInterface {
     private String pickedQuestion;
     private String chosenQuestion;
 
-    final private double INCREASE_PRIORITY = 1.05;
-    final private double DECREASE_PRIORITY = 0.95;
+    final private double INCREASE_PRIORITY = 1.1;
+    final private double DECREASE_PRIORITY = 0.90;
 
     public Control() {
         wordList = new LinkedList<WordPair>();
@@ -30,7 +30,7 @@ public class Control implements WordPairControlInterface {
         //remove spaces and set all characters to lowercase
         question = question.replaceAll(" ", "").toLowerCase();
         answer = answer.replaceAll(" ", "").toLowerCase();
-        
+
         //we only add a new wordpair if both input-fields are used
         //and the wordpair doesn't exist in the list 
         if (!question.isEmpty() && !answer.isEmpty()) {
@@ -154,14 +154,13 @@ public class Control implements WordPairControlInterface {
 //        return pickedQuestion;
 //    }
     @Override
-    public boolean checkGuess(String question, String guess
-    ) {
+    public boolean checkGuess(String question, String guess) {
         //again remove spaces and set all chars to lowercase
-        question = question.replaceAll(" ", "").toLowerCase();
-        guess = guess.replaceAll(" ", "").toLowerCase();
+        question = question.toLowerCase().replaceAll(" ", "");
+        guess = guess.toLowerCase().replaceAll(" ", "");
         String wordpair = question + "," + guess;
         Boolean foundWordpair = false;
-
+        String foundQuestion;
         for (int i = 0; i < size(); i++) {
 //-----------------------------------------------------------------------
 //if inputted wordpair matches a wordpair in the list
@@ -169,16 +168,22 @@ public class Control implements WordPairControlInterface {
 //-----------------------------------------------------------------------
             if (wordList.get(i).getWordpair().equals(wordpair)) {
                 foundWordpair = true;
+                System.out.println("Decrease priority!");
                 wordList.get(i).incrementWeight(DECREASE_PRIORITY);
+                normalizeWeights();
+                break;
             }
 //----------------------------------------------------------
 //if inputted question matches a question in the list
 //and inputte guess is not empty and foundWordpair is false
-//then we know the user has guess something wrong
+//then we know the user has guessed something wrong
 //the particular question is then moved up in priority
 //----------------------------------------------------------
-            if (wordList.get(i).getQuestion().equals(question) && guess != "" && foundWordpair == false) {
+            if (wordList.get(i).getQuestion().equals(question) && !guess.isEmpty() && foundWordpair == false) {
+                System.out.println("Increase priority!");
                 wordList.get(i).incrementWeight(INCREASE_PRIORITY);
+                normalizeWeights();
+                break;
             }
         }
         return foundWordpair;
@@ -221,6 +226,7 @@ public class Control implements WordPairControlInterface {
 
     @Override
     public boolean save(String input) {
+//        if (FileHandler.saveFileWithWeights(wordList, input) == true) {
         if (FileHandler.saveFile(wordList, input) == true) {
             return true;
         } else {
