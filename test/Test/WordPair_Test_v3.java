@@ -83,14 +83,12 @@ public class WordPair_Test_v3 {
         assertEquals(wordPairDemo.lookup("hus"), "house");
         assertEquals(wordPairDemo.lookup("bord"), "table");
     }
-
     @Test
     /**
      * This test is redundant (covered by testLoad).
      */
     public void testSave() {
     }
-
     /**
      * This test first tries to find an existing word pair.
      */
@@ -99,7 +97,6 @@ public class WordPair_Test_v3 {
         assertEquals("Looked up hest. Expected: horse. Got: " + wordPairDemo.lookup("hest"),
                 wordPairDemo.lookup("hest"), "horse");
     }
-
     /**
      * However, this is not if the first word exist. If the first word is found
      * (hest) then the returning word must also match. In other words :-) an
@@ -111,14 +108,12 @@ public class WordPair_Test_v3 {
         assertNotSame("Expected: something different from Cow. Got: " + wordPairDemo.lookup("hest"),
                 wordPairDemo.lookup("hest"), "Cow");
     }
-
     @Test
     public void testClear() {
         wordPairDemo.clear();
         int collectionSize = wordPairDemo.size();
         assertTrue("Cleared the collection of word pairs. Expected size: 0. Got size: " + collectionSize, collectionSize == 0);
     }
-
     /**
      * Since the setUp() method already added 3 word pairs, there should be 4
      * after this method adds the ko-cow pair.
@@ -131,7 +126,6 @@ public class WordPair_Test_v3 {
 
         assertEquals(wordPairDemo.lookup("ko"), "cow");
     }
-
     /**
      * Checking to see if a wordpair that we add is actually there.
      */
@@ -141,7 +135,6 @@ public class WordPair_Test_v3 {
         String lookUpResult = wordPairDemo.lookup("ko");
         assertEquals("Added wordpair ko-cow and called loookup(). Expected cow. Got: " + lookUpResult, lookUpResult, "cow");
     }
-
     @Test
     /**
      * This method simply calls the getRandomQuestion() 300 times. Becuase the
@@ -155,7 +148,7 @@ public class WordPair_Test_v3 {
      *
      */
     public void testGetRandomQuestion() {
-        int testTries = 1000000; // 1 million!!
+        int testTries = 1000000; 
         boolean horseFound = false;
         boolean houseFound = false;
         boolean tabelFound = false;
@@ -183,7 +176,7 @@ public class WordPair_Test_v3 {
         assertTrue("Expected true. Got: " + wordPairDemo.checkGuess("hest", "horse") + " for the wordpair hest, horse",
                 wordPairDemo.checkGuess("hest", "horse"));
     }
-
+   
     /**
      * It's not enough that the word "hest" exists. The answer "cow" is wrong
      * and the method checkGuess should return false for the question-answer
@@ -194,10 +187,10 @@ public class WordPair_Test_v3 {
         assertFalse("Expected false. Got: " + wordPairDemo.checkGuess("hest", "cow") + " for the wordpair hest,cow",
                 wordPairDemo.checkGuess("hest", "cow"));
     }
-
+   
     @Test
     public void testGetSize() {
         assertTrue("Expected size 3. Got: " + wordPairDemo.size(), wordPairDemo.size() == 3);
     }
-
+    
 }

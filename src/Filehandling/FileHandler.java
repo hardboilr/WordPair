@@ -32,8 +32,17 @@ public class FileHandler {
             Scanner sc = new Scanner(linje).useDelimiter(",");
             String question = sc.next().toLowerCase();
             String answer = sc.next().toLowerCase();
-            int priority = 1;
-            WordPair c = new WordPair(question, answer, priority);
+            
+            double priority = Double.parseDouble(sc.next());
+            double normalized = Double.parseDouble(sc.next());
+  
+//------------------------------------
+//Use these for testing purposes!
+//            double priority = 0.5;
+//            double normalized = 0.0;
+//------------------------------------
+            
+            WordPair c = new WordPair(question, answer, priority, normalized);
             wordsArray.add(c);  //Reading in a single line and saving in the ArrayList
         }
 
@@ -62,7 +71,7 @@ public class FileHandler {
         try {
                 output = new FileWriter(new File(filename));  //Opening connection to file.
                 for (WordPair combination : wordsArray) {   //running through the ArrayList.                    
-                    output.write(combination.getWordpair() + "\n");  //Each String object is written as a line in file.
+                    output.write(combination.toString() + "\n");  //Each String object is written as a line in file.
             }
 
             output.close();  //Closing the file

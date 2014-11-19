@@ -18,8 +18,12 @@ public class Control implements WordPairControlInterface {
     private String pickedQuestion;
     private String chosenQuestion;
 
+    final private double INCREASE_PRIORITY = 1.05;
+    final private double DECREASE_PRIORITY = 0.95;
+
     public Control() {
         wordList = new LinkedList<WordPair>();
+
     }
 
     @Override
@@ -38,8 +42,9 @@ public class Control implements WordPairControlInterface {
             }
             if (pairExists != true) {
                 //we always want to add a new wordpair to wordlist with priority 1
-                WordPair wordpair = new WordPair(question, answer, 1);
+                WordPair wordpair = new WordPair(question, answer, 0.5, 0.0);
                 wordList.add(wordpair);
+                normalizePriorities();
             }
         }
     }
@@ -52,73 +57,92 @@ public class Control implements WordPairControlInterface {
 
     @Override
     public String getRandomQuestion() {
-        if (!wordList.isEmpty()) {
-            Boolean foundIt = false;
-            LinkedList<WordPair> randomList = new LinkedList<WordPair>();
-            Random roll = new Random();
-            int randomPriority;
-            do {
-                do {
-//----------------------------------------------------------------            
-//find a random number between 1-15 and assign to 'randomPriority'
-//----------------------------------------------------------------
-                    randomPriority = roll.nextInt(15) + 1;
-                    switch (randomPriority) {
-                        case 1:
-                        case 2:
-                        case 3:
-                        case 4:
-                        case 5: //1-5 high priority
-                            randomPriority = 1;
-                            break;
-                        case 6:
-                        case 7:
-                        case 8:
-                        case 9:
-                            randomPriority = 2;
-                            break;
-                        case 10:
-                        case 11:
-                        case 12:
-                            randomPriority = 3;
-                            break;
-                        case 13:
-                        case 14:
-                            randomPriority = 4;
-                            break;
-                        case 15:
-                            randomPriority = 5; //low priority
-                            break;
-                    }
-//---------------------------------------------------------------------
-//run through wordList and find all wordpairs equal to 'randomPriority'
-//put those in 'randomList' and set foundIt to true
-//---------------------------------------------------------------------
-                    for (int i = 0; i < wordList.size(); i++) {
-                        int index = wordList.get(i).getPriority();
-                        if (index == randomPriority) {
-                            randomList.add(wordList.get(i));
-                            foundIt = true;
-                        }
-                    }
-                } while (foundIt == false);
-//---------------------------------------------------------------------------------
-//assign a random index-position to arrayIndex, based on the size of the randomList
-//take a wordpair from this index and assign to a wordpair object
-//assign that particular question to 'chosenWordpair'
-//assign string wordpair to text
-//----------------------------------------------------------------------------------
-                int arrayIndex = roll.nextInt(randomList.size());
-                WordPair wordpair = randomList.get(arrayIndex);
-                pickedQuestion = wordpair.getQuestion();
-            } while (pickedQuestion == chosenQuestion); //we don't want repeat questions!
-            chosenQuestion = pickedQuestion;
-        } else {
-            pickedQuestion = null;
+        Random roll = new Random();
+        double result = roll.nextDouble();
+        //System.out.println(result);
+        String pickedQuestion = null;
+        double sum = 0;
+        for (int i = 0; i < size(); i++) {
+            sum = sum + wordList.get(i).getNormalizedPriority();
+            if (sum >= result) {
+                pickedQuestion = wordList.get(i).getQuestion();
+                break;
+            }
         }
+
+        //pickedQuestion = wordList.get(0).getQuestion();
+        //System.out.println(pickedQuestion);
         return pickedQuestion;
     }
 
+//    @Override
+//    public String getRandomQuestion() {
+//        if (!wordList.isEmpty()) {
+//            Boolean foundIt = false;
+//            LinkedList<WordPair> randomList = new LinkedList<WordPair>();
+//            Random roll = new Random();
+//            int randomPriority;
+//            do {
+//                do {
+////----------------------------------------------------------------            
+////find a random number between 1-15 and assign to 'randomPriority'
+////----------------------------------------------------------------
+//                    randomPriority = roll.nextInt(15) + 1;
+//                    switch (randomPriority) {
+//                        case 1:
+//                        case 2:
+//                        case 3:
+//                        case 4:
+//                        case 5: //1-5 high priority
+//                            randomPriority = 1;
+//                            break;
+//                        case 6:
+//                        case 7:
+//                        case 8:
+//                        case 9:
+//                            randomPriority = 2;
+//                            break;
+//                        case 10:
+//                        case 11:
+//                        case 12:
+//                            randomPriority = 3;
+//                            break;
+//                        case 13:
+//                        case 14:
+//                            randomPriority = 4;
+//                            break;
+//                        case 15:
+//                            randomPriority = 5; //low priority
+//                            break;
+//                    }
+////---------------------------------------------------------------------
+////run through wordList and find all wordpairs equal to 'randomPriority'
+////put those in 'randomList' and set foundIt to true
+////---------------------------------------------------------------------
+//                    for (int i = 0; i < wordList.size(); i++) {
+//                        int index = wordList.get(i).getPriority();
+//                        if (index == randomPriority) {
+//                            randomList.add(wordList.get(i));
+//                            foundIt = true;
+//                        }
+//                    }
+//                } while (foundIt == false);
+////---------------------------------------------------------------------------------
+////assign a random index-position to arrayIndex, based on the size of the randomList
+////take a wordpair from this index and assign to a wordpair object
+////assign that particular question to 'chosenWordpair'
+////assign string wordpair to text
+////----------------------------------------------------------------------------------
+//                int arrayIndex = roll.nextInt(randomList.size());
+//                WordPair wordpair = randomList.get(arrayIndex);
+//                pickedQuestion = wordpair.getQuestion();
+//            } while (pickedQuestion == chosenQuestion); //we don't want repeat questions!
+//            chosenQuestion = pickedQuestion;
+//        } else {
+//            pickedQuestion = null;
+//        }
+//        return pickedQuestion;
+//    }
     @Override
     public boolean checkGuess(String question, String guess
     ) {
@@ -135,9 +159,7 @@ public class Control implements WordPairControlInterface {
 //-----------------------------------------------------------------------
             if (wordList.get(i).getWordpair().equals(wordpair)) {
                 foundWordpair = true;
-                if (wordList.get(i).getPriority() < 5) {
-                    wordList.get(i).incrementPriority(1);
-                }
+                wordList.get(i).incrementPriority(DECREASE_PRIORITY);
             }
 //----------------------------------------------------------
 //if inputted question matches a question in the list
@@ -146,9 +168,7 @@ public class Control implements WordPairControlInterface {
 //the particular question is then moved up in priority
 //----------------------------------------------------------
             if (wordList.get(i).getQuestion().equals(question) && guess != "" && foundWordpair == false) {
-                if (wordList.get(i).getPriority() >= 2) {
-                    wordList.get(i).incrementPriority(-1);
-                }
+                wordList.get(i).incrementPriority(INCREASE_PRIORITY);
             }
         }
         return foundWordpair;
@@ -182,6 +202,7 @@ public class Control implements WordPairControlInterface {
     ) {
         if (FileHandler.loadFile(input) != null) {
             wordList = FileHandler.loadFile(input);
+            normalizePriorities();
             return true;
         } else {
             return false;
@@ -189,8 +210,7 @@ public class Control implements WordPairControlInterface {
     }
 
     @Override
-    public boolean save(String input
-    ) {
+    public boolean save(String input) {
         if (FileHandler.saveFile(wordList, input) == true) {
             return true;
         } else {
@@ -201,5 +221,18 @@ public class Control implements WordPairControlInterface {
     @Override
     public void clear() {
         wordList.clear();
+    }
+
+    private void normalizePriorities() {
+        double sum = 0;
+        //sum all priorities
+        for (int i = 0; i < size(); i++) {
+            sum = sum + wordList.get(i).getPriority();
+        }
+        //normalize priorities
+        for (int i = 0; i < size(); i++) {
+            double normalizedValue = wordList.get(i).getPriority() / sum;
+            wordList.get(i).setNormalizedPriority(normalizedValue);
+        }
     }
 }

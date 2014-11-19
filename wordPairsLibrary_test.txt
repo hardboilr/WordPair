@@ -1,0 +1,10 @@
+bil,car,0.5,0.1126
+hest,horse,0.95,0.2140
+hej,hi,0.40,0.0901
+cykel,bicycle,0.80,0.1802
+spil,game,0.53,0.1194
+fransk,french,0.3,0.0676
+dansk,danish,0.25,0.0563
+krig,war,0.10,0.0225
+mus,mouse,0.6,0.1351
+kaffe,coffee,0.01,0.0023
