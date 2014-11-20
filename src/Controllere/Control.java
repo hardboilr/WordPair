@@ -1,6 +1,5 @@
 /**
  * @author Tobias & Christoffer
- * @todo i add() handle spaces, small/big letters etc.
  */
 package Controllere;
 
@@ -14,15 +13,15 @@ import java.util.Scanner;
 public class Control implements WordPairControlInterface {
 
     private LinkedList<WordPair> wordList;
-    private String pickedQuestion;
-    private String chosenQuestion;
+    
+//    private String pickedQuestion; //used in old implementation of getRandomQuestion
+//    private String chosenQuestion; //used in old implementation of getRandomQuestion
 
-    final private double INCREASE_PRIORITY = 1.1;
-    final private double DECREASE_PRIORITY = 0.90;
+    private final double INCREASE_PRIORITY = 1.1;
+    private final double DECREASE_PRIORITY = 0.90;
 
     public Control() {
         wordList = new LinkedList<WordPair>();
-
     }
 
     @Override

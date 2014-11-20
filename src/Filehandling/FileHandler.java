@@ -1,5 +1,5 @@
 /**
- * * @author Christoffer
+ * * @author Tobias & Christoffer
  */
 
 package Filehandling;

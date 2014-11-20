@@ -27,4 +27,3 @@ hund,dog
 tog,train
 tastatur,keyboard
 kaste,throw
-test,test

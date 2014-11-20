@@ -5,11 +5,10 @@ package Boundaries;
 
 import Interfaces.WordPairControlInterface;
 import Controllere.Control;
-import java.util.Scanner;
 
 public class GUI_Main extends javax.swing.JFrame {
 
-    WordPairControlInterface control;
+    private WordPairControlInterface control;
 
     public GUI_Main() {
         initComponents();
@@ -62,11 +61,6 @@ public class GUI_Main extends javax.swing.JFrame {
         getContentPane().add(jTextField_answer, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 150, 120, -1));
 
         jTextField_question.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        jTextField_question.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField_questionActionPerformed(evt);
-            }
-        });
         getContentPane().add(jTextField_question, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 110, 120, -1));
 
         jButton_lookUp.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
@@ -153,10 +147,6 @@ public class GUI_Main extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton_guessActionPerformed
 
-    private void jTextField_questionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_questionActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField_questionActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -218,9 +208,6 @@ public class GUI_Main extends javax.swing.JFrame {
 
     private void displayRandomQuestion() {
         String question = control.getRandomQuestion();
-      //  String question;
-      //  Scanner sc = new Scanner(text).useDelimiter(",");
-      //  question = sc.next();
         jTextField_question.setText(question);
         jTextField_answer.setText("");
     }
